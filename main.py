@@ -25,7 +25,7 @@ app = FastAPI(title="AI Flashcard Generator")
 # Allow frontend requests from your Next.js app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],  # your frontend URL
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "https://pdflashgen.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
