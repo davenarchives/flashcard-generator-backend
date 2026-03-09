@@ -1,18 +1,22 @@
-import google.generativeai as genai
 import os
+
 from dotenv import load_dotenv
+from openai import OpenAI
 
-# Load your API key from .env
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-print("📋 Listing available Gemini models...\n")
+api_key = os.getenv("GROQ_API_KEY")
+if not api_key:
+    raise ValueError("GROQ_API_KEY not found. Add it to your .env file.")
+
+base_url = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
+client = OpenAI(api_key=api_key, base_url=base_url)
+
+print("Listing available Groq models...\n")
 
 try:
-    models = genai.list_models()
-    for m in models:
-        # only show models that support text generation
-        if "generateContent" in m.supported_generation_methods:
-            print(f"✅ {m.name} — supports: {m.supported_generation_methods}")
-except Exception as e:
-    print("❌ Error listing models:", e)
+    models = client.models.list()
+    for model in models.data:
+        print(f"- {model.id}")
+except Exception as exc:  # noqa: BLE001
+    print("Error listing models:", exc)

@@ -1,2 +1,28 @@
-# Ignore environment variables
+# Environment variables
 .env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache/bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS files and logs
+.DS_Store
+*.log
